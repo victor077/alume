@@ -1,8 +1,4 @@
-import fastify, {
-  FastifyInstance,
-  FastifyReply,
-  FastifyRequest,
-} from "fastify";
+import { FastifyReply } from "fastify";
 import { IAuthService } from "./auth.interfaces";
 import {
   LoginDto,
