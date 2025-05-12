@@ -42,7 +42,9 @@ export class FinanceController {
       const finance = await this.financeService.selectAllFinance(idStudent);
       return reply.status(200).send({
         status: "sucess",
-        finances: finance,
+        data: {
+          finances: finance,
+        },
       });
     } catch (error: any) {
       return reply.status(404).send({
