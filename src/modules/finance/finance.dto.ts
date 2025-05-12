@@ -1,10 +1,16 @@
 import { z } from "zod";
 
 export const registerFinanceSchema = z.object({
-  name: z.string().min(2),
-  lastName: z.string().min(2),
-  email: z.string().email(),
-  password: z.string().min(8),
+  totalValue: z.number().min(100),
+  maxInstallments: z.number().min(2),
 });
 
 export type RegisterFinanceDto = z.infer<typeof registerFinanceSchema>;
+
+export const responseFinanceSchema = z.object({
+  totalValue: z.number(),
+  maxInstallments: z.number(),
+  id: z.number(),
+});
+
+export type StudentFinancingDto = z.infer<typeof responseFinanceSchema>;

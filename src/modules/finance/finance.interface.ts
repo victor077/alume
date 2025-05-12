@@ -1,12 +1,15 @@
 import { Prisma, StudentFinancing } from "@prisma/client";
-import { RegisterFinanceDto } from "./finance.dto";
+import { RegisterFinanceDto, StudentFinancingDto } from "./finance.dto";
 
 export interface IFinanceRepository {
   createFinance(
-    data: Prisma.StudentFinancingCreateInput
+    idStudent: string,
+    data: Omit<Prisma.StudentFinancingCreateInput, "student">
   ): Promise<StudentFinancing>;
+  selectAllFinance(idStudent: string): Promise<StudentFinancing[]>;
 }
 
 export interface IFinanceService {
-  createFinance(data: RegisterFinanceDto): Promise<StudentFinancing>;
+  createFinance(idStudent: string, data: RegisterFinanceDto): Promise<number>;
+  selectAllFinance(idStudent: string): Promise<StudentFinancingDto[]>;
 }
