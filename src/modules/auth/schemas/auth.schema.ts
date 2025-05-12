@@ -91,5 +91,6 @@ export const loginSwaggerSchema = {
   },
   tags: ["Auth"],
   summary: "Login do estudante",
-  description: "Autentica o estudante e retorna um token",
+  description:
+    "Autentica o estudante e retorna um token, (token retorna no body apenas para facilitar os teste no swagger)",
 };
