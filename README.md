@@ -78,4 +78,4 @@ Authorization: Bearer <token>
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **[Victor Angelo]**.
+Desenvolvido por **Victor Angelo**.
