@@ -13,10 +13,12 @@ API desenvolvida com **Fastify**, **TypeScript**, **Prisma** e **JWT**, para sim
 - [JWT](https://jwt.io/) — autenticação segura por token
 - Swagger (via `@fastify/swagger`) — documentação interativa da API
 
+---
+
 ## ⚙️ Pré-requisitos
 
 - Node.js `^18.x`
-- PostgreSQL rodando localmente ou em container
+- Docker e Docker Compose ✅ (necessário para subir o PostgreSQL)
 - [pnpm](https://pnpm.io/) ou `npm` ou `yarn`
 
 ---
@@ -26,9 +28,20 @@ API desenvolvida com **Fastify**, **TypeScript**, **Prisma** e **JWT**, para sim
 Crie um arquivo `.env` com:
 
 ```
-DATABASE_URL="postgresql://<user>:<password>@localhost:5432/finance"
+DATABASE_URL="postgresql://finance_user:finance123@localhost:5432/finance"
 JWT_SECRET="sua-chave-secreta"
 ```
+
+---
+
+## 🐳 Subir banco com Docker
+
+```bash
+docker compose up -d
+```
+
+> Esse comando irá subir um container PostgreSQL chamado `finance_postgres`.
+
 ---
 
 ## 📦 Instalação
