@@ -7,7 +7,10 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "baseUrl": "."
+      "baseUrl": "./src",
+      "paths": {
+        "@prisma": ["plugins/prisma.ts"]
+      }
     },
     "include": ["src"],
     "exclude": ["node_modules"]
