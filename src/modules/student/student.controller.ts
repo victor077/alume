@@ -8,7 +8,7 @@ export class StudentController {
   async getStudentById(id: string, reply: FastifyReply) {
     try {
       const student = await this.studentService.selectStudentById(id);
-      return reply.status(201).send({
+      return reply.status(200).send({
         status: "sucess",
         data: student,
       });
