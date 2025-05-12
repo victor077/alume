@@ -28,9 +28,7 @@ export class AuthService implements IAuthService {
   }
 
   async loginStudent(data: LoginDto) {
-    console.log("data", data);
     const student = await this.authRepository.findStudentByEmail(data.email);
-    console.log("student", student);
     if (!student) throw new Error("Esse email não existe");
     const isValid = await bcrypt.compare(data.password, student.password);
     if (!isValid) throw new Error("Credenciais inválidas");
