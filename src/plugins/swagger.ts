@@ -3,11 +3,6 @@ import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUI from "@fastify/swagger-ui";
 import { FastifyInstance } from "fastify";
 
-/**
- * This plugins adds some utilities to handle http errors
- *
- * @see https://github.com/fastify/fastify-swagger
- */
 const swaggerPlugin = fastifyPlugin(
   async (fastify: FastifyInstance) => {
     await fastify.register(fastifySwagger, {
@@ -16,7 +11,18 @@ const swaggerPlugin = fastifyPlugin(
         info: {
           title: "API",
           version: "1.0.0",
+          description: "Documentação da API com autenticação JWT",
         },
+        components: {
+          securitySchemes: {
+            bearerAuth: {
+              type: "http",
+              scheme: "bearer",
+              bearerFormat: "JWT",
+            },
+          },
+        },
+        security: [{ bearerAuth: [] }],
       },
     });
 
