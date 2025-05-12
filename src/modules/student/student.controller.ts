@@ -1,6 +1,6 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import { FastifyReply } from "fastify";
 import { IStudentService } from "./student.interface";
-import { UpdateStudentDto } from "./dtos/student.dto";
+import { UpdateStudentDto } from "./student.dto";
 
 export class StudentController {
   constructor(private readonly studentService: IStudentService) {}

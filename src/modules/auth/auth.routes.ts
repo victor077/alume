@@ -2,12 +2,10 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { AuthController } from "./auth.controller";
 import { AuthRepository } from "./auth.repository";
 import { AuthService } from "./auth.service";
-import { LoginDto, RegisterDto } from "./dtos/auth.dto";
-import {
-  loginSwaggerSchema,
-  registerSwaggerSchema,
-} from "./schemas/auth.schema";
+import { LoginDto, RegisterDto } from "./auth.dto";
+
 import { FastifyInstanceToken } from "types";
+import { loginSwaggerSchema, registerSwaggerSchema } from "./auth.schema";
 
 const repository = new AuthRepository();
 const service = new AuthService(repository);

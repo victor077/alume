@@ -1,4 +1,4 @@
-import { UpdateStudentDto } from "./dtos/student.dto";
+import { UpdateStudentDto } from "./student.dto";
 import { IStudentRepostiry, IStudentService } from "./student.interface";
 
 export class StudentService implements IStudentService {

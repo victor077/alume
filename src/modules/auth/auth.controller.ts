@@ -1,11 +1,6 @@
 import { FastifyReply } from "fastify";
 import { IAuthService } from "./auth.interfaces";
-import {
-  LoginDto,
-  loginSchema,
-  RegisterDto,
-  registerSchema,
-} from "./dtos/auth.dto";
+import { LoginDto, loginSchema, RegisterDto, registerSchema } from "./auth.dto";
 import { FastifyInstanceToken } from "types";
 
 export class AuthController {

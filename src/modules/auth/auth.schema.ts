@@ -1,5 +1,5 @@
 import fromZodSchema from "zod-to-json-schema";
-import { loginSchema, registerSchema } from "../dtos/auth.dto";
+import { loginSchema, registerSchema } from "./auth.dto";
 
 const registerBodySchema = fromZodSchema(registerSchema);
 const loginBodySchema = fromZodSchema(loginSchema);

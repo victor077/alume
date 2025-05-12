@@ -2,9 +2,9 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { StudentRepository } from "./student.repository";
 import { StudentService } from "./student.service";
 import { StudentController } from "./student.controller";
-import { schemaEstudent, schemaUpdateStudent } from "./schemas/student.schema";
+import { schemaEstudent, schemaUpdateStudent } from "./student.schema";
 import { FastifyInstanceToken } from "types";
-import { updateStudentSchema } from "./dtos/student.dto";
+import { updateStudentSchema } from "./student.dto";
 
 const repository = new StudentRepository();
 const service = new StudentService(repository);

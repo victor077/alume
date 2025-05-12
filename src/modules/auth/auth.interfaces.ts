@@ -4,7 +4,7 @@ import {
   RegisterDto,
   ResponseLoginDto,
   ResponseRegisterDto,
-} from "./dtos/auth.dto";
+} from "./auth.dto";
 
 export interface IAuthRepository {
   createStudent(data: Prisma.StudentCreateInput): Promise<Student>;
