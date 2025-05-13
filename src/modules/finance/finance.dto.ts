@@ -10,7 +10,6 @@ export type RegisterFinanceDto = z.infer<typeof registerFinanceSchema>;
 export const responseFinanceSchema = z.object({
   totalValue: z.number(),
   maxInstallments: z.number(),
-  id: z.number(),
 });
 
 export type StudentFinancingDto = z.infer<typeof responseFinanceSchema>;

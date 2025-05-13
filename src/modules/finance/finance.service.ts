@@ -28,10 +28,6 @@ export class FinanceService implements IFinanceService {
 
   async selectAllFinance(idStudent: string): Promise<StudentFinancingDto[]> {
     const finance = await this.financeRepository.selectAllFinance(idStudent);
-    return finance.map((value, index) => ({
-      totalValue: value.totalValue,
-      maxInstallments: value.maxInstallments,
-      id: index,
-    }));
+    return finance.map((value) => value);
   }
 }
