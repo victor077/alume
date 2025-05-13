@@ -1,7 +1,6 @@
-import { StudentFinancing } from "@prisma/client";
 import { RegisterFinanceDto, StudentFinancingDto } from "./finance.dto";
 import { IFinanceRepository, IFinanceService } from "./finance.interface";
-import { truncateToTwoDecimals } from "utils";
+import { Finance } from "./finance.domain";
 
 export class FinanceService implements IFinanceService {
   constructor(private readonly financeRepository: IFinanceRepository) {}
@@ -11,23 +10,28 @@ export class FinanceService implements IFinanceService {
     data: RegisterFinanceDto
   ): Promise<number> {
     const { maxInstallments, totalValue } = data;
-    const fessMonthPercentage = 0.02;
-    const pmt =
-      totalValue *
-      (fessMonthPercentage /
-        (1 - Math.pow(1 + fessMonthPercentage, -maxInstallments)));
-    const pmtFormated = truncateToTwoDecimals(pmt);
+    const finance = new Finance(maxInstallments, totalValue);
+    const installment = finance.getInstallment();
     await this.financeRepository.createFinance(idStudent, {
       maxInstallments,
-      fessMonth: fessMonthPercentage,
+      fessMonth: Finance.fessMonthPercentage,
       totalValue,
-      valueInstallments: pmtFormated,
+      valueInstallments: installment,
     });
-    return pmtFormated;
+    return installment;
   }
 
   async selectAllFinance(idStudent: string): Promise<StudentFinancingDto[]> {
     const finance = await this.financeRepository.selectAllFinance(idStudent);
-    return finance.map((value) => value);
+    const result = finance.map((value) => {
+      const formateResult = {
+        totalValue: value.totalValue,
+        maxInstallments: value.maxInstallments,
+        id: value.id,
+      };
+      return formateResult;
+    });
+
+    return result;
   }
 }
