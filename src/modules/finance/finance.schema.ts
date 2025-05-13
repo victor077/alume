@@ -52,7 +52,7 @@ export const schemaGetAllFinances = {
               items: {
                 type: "object",
                 properties: {
-                  id: { type: "number", example: 0 },
+                  id: { type: "string", example: "0" },
                   totalValue: { type: "number", example: 10000 },
                   maxInstallments: { type: "number", example: 12 },
                 },

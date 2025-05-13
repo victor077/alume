@@ -8,6 +8,7 @@ export const registerFinanceSchema = z.object({
 export type RegisterFinanceDto = z.infer<typeof registerFinanceSchema>;
 
 export const responseFinanceSchema = z.object({
+  id: z.string(),
   totalValue: z.number(),
   maxInstallments: z.number(),
 });
