@@ -17,7 +17,6 @@ const configPlugin = fastifyPlugin(
     const parsed = schema.safeParse(process.env);
     if (!parsed.success) {
       fastify.log.error("Variaveis de ambientes estão incorretas");
-      console.error(parsed.error.format());
       throw new Error("Invalid environment variables");
     }
     fastify.decorate("config", parsed.data);
