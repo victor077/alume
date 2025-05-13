@@ -1,14 +1,9 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { StudentRepository } from "./student.repository";
-import { StudentService } from "./student.service";
-import { StudentController } from "./student.controller";
 import { schemaEstudent, schemaUpdateStudent } from "./student.schema";
-import { FastifyInstanceToken } from "types";
+import { FastifyInstanceToken, TokenID } from "types";
 import { updateStudentSchema } from "./student.dto";
+import { controller } from ".";
 
-const repository = new StudentRepository();
-const service = new StudentService(repository);
-const controller = new StudentController(service);
 export async function studentRoutes(fastify: FastifyInstance) {
   const app = fastify as FastifyInstanceToken;
   fastify.get(
@@ -18,8 +13,8 @@ export async function studentRoutes(fastify: FastifyInstance) {
       onRequest: [app.authenticate],
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const { id } = request.user as { id: string };
-      return controller.getStudentById(id, reply);
+      const { sub } = (await request.jwtDecode()) as TokenID;
+      return controller.selectStudentById(sub, reply);
     }
   );
 
@@ -30,7 +25,7 @@ export async function studentRoutes(fastify: FastifyInstance) {
       onRequest: [app.authenticate],
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const { id } = request.user as { id: string };
+      const { sub } = (await request.jwtDecode()) as TokenID;
       const parsed = updateStudentSchema.safeParse(request.body);
       if (!parsed.success) {
         return reply.status(400).send({
@@ -38,7 +33,7 @@ export async function studentRoutes(fastify: FastifyInstance) {
           message: "Erro de validação",
         });
       }
-      return controller.updateStudentProfile(id, parsed.data, reply);
+      return controller.updateStudentProfile(sub, parsed.data, reply);
     }
   );
 }

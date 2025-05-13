@@ -1,29 +1,23 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { AuthController } from "./auth.controller";
-import { AuthRepository } from "./auth.repository";
-import { AuthService } from "./auth.service";
+import { FastifyInstance, FastifyRequest } from "fastify";
 import { LoginDto, RegisterDto } from "./auth.dto";
 
 import { FastifyInstanceToken } from "types";
 import { loginSwaggerSchema, registerSwaggerSchema } from "./auth.schema";
-
-const repository = new AuthRepository();
-const service = new AuthService(repository);
-const controller = new AuthController(service);
+import { controller } from ".";
 
 export async function authRoutes(fastify: FastifyInstance) {
   fastify.post(
     "register",
     { schema: registerSwaggerSchema },
     async (request: FastifyRequest<{ Body: RegisterDto }>, reply) => {
-      return await controller.postRegisterStudent(request.body, reply);
+      return await controller.registerStudent(request.body, reply);
     }
   );
   fastify.post(
     "login",
     { schema: loginSwaggerSchema },
     async (request: FastifyRequest<{ Body: LoginDto }>, reply) => {
-      return await controller.postLoginStudent(
+      return await controller.loginStudent(
         request.body,
         reply,
         fastify as FastifyInstanceToken

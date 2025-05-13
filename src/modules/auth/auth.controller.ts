@@ -6,13 +6,13 @@ import { FastifyInstanceToken } from "types";
 export class AuthController {
   constructor(private readonly authService: IAuthService) {}
 
-  async postRegisterStudent(data: RegisterDto, reply: FastifyReply) {
+  async registerStudent(data: RegisterDto, reply: FastifyReply) {
     const parsed = registerSchema.safeParse(data);
     if (!parsed.success) {
       return reply.status(400).send({
         status: "error",
         message: "Erro na validação dos parametros",
-        eroors: parsed.error.format(),
+        error: parsed.error.format(),
       });
     }
     try {
@@ -29,7 +29,7 @@ export class AuthController {
     }
   }
 
-  async postLoginStudent(
+  async loginStudent(
     data: LoginDto,
     reply: FastifyReply,
     app: FastifyInstanceToken
@@ -44,8 +44,8 @@ export class AuthController {
     }
     try {
       const student = await this.authService.loginStudent(parsed.data);
-      const token = app.signToken({ id: student.id, email: student.email });
-      return reply.status(201).header("Authorization", `Berear ${token}`).send({
+      const token = app.signToken({ sub: student.id, email: student.email });
+      return reply.status(201).send({
         status: "sucess",
         data: student,
         token,

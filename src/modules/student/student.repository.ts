@@ -1,4 +1,4 @@
-import { Prisma, Student } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { IStudentRepostiry } from "./student.interface";
 import { prisma } from "@prisma";
 

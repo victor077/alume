@@ -5,7 +5,7 @@ import { UpdateStudentDto } from "./student.dto";
 export class StudentController {
   constructor(private readonly studentService: IStudentService) {}
 
-  async getStudentById(id: string, reply: FastifyReply) {
+  async selectStudentById(id: string, reply: FastifyReply) {
     try {
       const student = await this.studentService.selectStudentById(id);
       return reply.status(200).send({

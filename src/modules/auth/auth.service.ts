@@ -1,4 +1,3 @@
-import fastify, { FastifyInstance } from "fastify";
 import { IAuthRepository, IAuthService } from "./auth.interfaces";
 import { LoginDto, RegisterDto } from "./auth.dto";
 import bcrypt from "bcrypt";

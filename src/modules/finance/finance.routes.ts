@@ -3,7 +3,7 @@ import { FinanceRepository } from "./finance.repository";
 import { FinanceService } from "./finance.service";
 import { FinanceController } from "./finance.controller";
 import { schemaGetAllFinances, schemaRegisterFinance } from "./finance.schema";
-import { FastifyInstanceToken } from "types";
+import { FastifyInstanceToken, TokenID } from "types";
 import { RegisterFinanceDto } from "./finance.dto";
 
 const repository = new FinanceRepository();
@@ -22,8 +22,8 @@ export async function financeRoutes(fastify: FastifyInstance) {
       request: FastifyRequest<{ Body: RegisterFinanceDto }>,
       reply: FastifyReply
     ) => {
-      const { id } = request.user as { id: string };
-      return await controller.postFinance(id, request.body, reply);
+      const { sub } = (await request.jwtDecode()) as TokenID;
+      return await controller.createFinance(sub, request.body, reply);
     },
   });
 
@@ -34,8 +34,8 @@ export async function financeRoutes(fastify: FastifyInstance) {
       onRequest: [app.authenticate],
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const { id } = request.user as { id: string };
-      return controller.getAllFinance(id, reply);
+      const { sub } = (await request.jwtDecode()) as TokenID;
+      return controller.sellectAllFinance(sub, reply);
     }
   );
 }

@@ -5,7 +5,7 @@ import { IFinanceService } from "./finance.interface";
 export class FinanceController {
   constructor(private readonly financeService: IFinanceService) {}
 
-  async postFinance(
+  async createFinance(
     idStudent: string,
     data: RegisterFinanceDto,
     reply: FastifyReply
@@ -37,7 +37,7 @@ export class FinanceController {
     }
   }
 
-  async getAllFinance(idStudent: string, reply: FastifyReply) {
+  async sellectAllFinance(idStudent: string, reply: FastifyReply) {
     try {
       const finance = await this.financeService.selectAllFinance(idStudent);
       return reply.status(200).send({
